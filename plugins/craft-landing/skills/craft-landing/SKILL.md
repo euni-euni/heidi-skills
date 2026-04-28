@@ -21,17 +21,22 @@ input 정리(define.md/prd.md/대화)된 상태에서 다음 prompt로 시작한
 
 ### Phase 2 — 디자인 톤앤매너 교정
 
-`references-matrix.md`의 4-D 레퍼런스 매트릭스로 톤 후보 수집 → 후보 3안 비교 → 선택 → `tokens-schema.md`로 토큰화.
+**진입 전 외부 리서치 의무** — 타겟 visual diet / 트렌드 / 경쟁사를 *외부 검색*으로 채운다 (`references-matrix.md` 참조). 회고·내 지식·추정으로 채우면 anti-pattern.
+
+이후 흐름: 후보 차원 분리(모드/결/액센트) → 키워드 도출(전략 vs 디자인 분리) → 형용사 cluster화 → 4안 매트릭스(전략적 분기 + 주축/부가 명시) → 1안 선택 → 토큰화.
 
 **핵심 룰**: 색상/타이포/모티프/레이아웃 매 결정에 *이유* 명시. "도파민 컬러", "현대적" 같은 패턴 언급만으로는 불충분 — 4-D 레퍼런스 중 무엇이 받치는지 명시.
 
 ### Phase 3 — 내용 (hero + 내러티브)
 
-Hero에서 가장 전달할 한 가지 + 랜딩 전반 내러티브 arc 잡기. prompt 패턴:
+Hero에서 가장 전달할 한 가지 + 랜딩 전반 내러티브 arc. prompt 패턴:
 
 > 너는 이미 유명 에이전시의 시니어 마케터처럼 현대적·독창적으로 다시 고심해서 [내용/카피]을 잡아줘
 
-**핵심 룰**: PRD 내부 용어를 *타겟 일상 언어*로 번역. "공급자적 관점"의 카피는 즉시 거부. 타겟이 매일 쓰는 말로 다시.
+**핵심 룰**:
+- PRD 내부 용어를 *타겟 일상 언어*로 번역. "공급자적 관점" 카피는 즉시 거부.
+- Hero 카피 외 *전반적 어미·화자 톤 일관성*도 점검. 객관 서술 + 친근 어미 혼재 = 기계 톤.
+- 화자 default = "친구 권유". 제품 의인화(객관 OS 서술) X.
 
 ### Phase 4 — 에셋 추가/수정
 
@@ -39,19 +44,22 @@ Hero에서 가장 전달할 한 가지 + 랜딩 전반 내러티브 arc 잡기. 
 
 ## Cross-cutting
 
-**모바일 분기는 처음부터, 그리고 매 수정 단계마다.** 데스크탑 우선으로 짜고 나중에 모바일 맞추기 X.
+**1. 분기점 user 컨펌 의무.** Phase 진입/완료, 후보 비교 후 1안 선택, hero single message 등 *큰 분기*는 자율 진행 X. 자율 micro(섹션 body, 토큰 디테일)와 컨펌 분기 분리.
+
+**2. 보고 시 결정 근거 의무.** 결과만 보고 X. 시각/카피/구조 매 결정에 근거를 표 형태로 (input 직접 / 레퍼런스 / 직관/risk).
+
+**3. 모바일 분기는 처음부터, 매 수정 단계마다.** 데스크탑 우선으로 짜고 나중에 모바일 맞추기 X.
 
 ## Scope-out (이 스킬에서 다루지 않음)
 
-- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인 능력에 맡김
+- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인 능력에 맡김 (단, 어미 *분포 모니터링*은 Phase 3 내).
 - **production화** (vibe-monorepo 이관 + Vercel 배포) — `wizard-vibecoding` 스킬 사용
 - **시각 originality 가드레일** — `wizard-design:landing-design-create` 스킬이 담당
 - **근본 재시작** (예: ai-study-manager Day 2 v3 → v4 같은 큰 리디자인) — 예외 사건, 스킬화 X
 
 ## Reference 파일
 
-- `phases.md` — 각 phase 상세
-- `references-matrix.md` — 4-D 레퍼런스 매트릭스
-- `tokens-schema.md` — 디자인 토큰 스키마 (값은 매 프로젝트 채움)
-- `anti-patterns.md` — Claude 반복 실수 5종 가드레일
-- `cases/ai-study-manager-student.md` — 첫 케이스
+- `phases.md` — 각 phase 상세 (외부 리서치 / 키워드 분리 / 형용사 cluster 등)
+- `references-matrix.md` — 4-D 레퍼런스 매트릭스 + 외부 리서치 출처 + 분석 패턴
+- `tokens-schema.md` — 디자인 토큰 스키마 (값은 매 프로젝트 채움, 토큰화 시점은 톤 결정 후)
+- `anti-patterns.md` — Claude 반복 실수 13종 가드레일
