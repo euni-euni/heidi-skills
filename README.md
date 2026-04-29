@@ -1,15 +1,31 @@
 # heidi-skills
 
-Heidi의 개인 Claude Code 스킬 모음. Claude Code marketplace로 publish됨.
+Heidi의 Claude Code 스킬 모음. Claude Code marketplace로 publish.
 
 ## 설치
 
-```bash
-# 1. marketplace 등록
-/plugin marketplace add euni-euni/heidi-skills
+Claude Code 안에서 marketplace 등록 → 원하는 스킬 설치:
 
-# 2. plugin 설치
-/plugin install craft-landing@heidi-skills
+```
+/plugin marketplace add euni-euni/heidi-skills
+/plugin install <skill-name>@heidi-skills
+/reload-plugins
+```
+
+`<skill-name>`은 아래 표 참조. 각 스킬의 자세한 사용법은 스킬별 README 링크 참조.
+
+## 스킬 목록
+
+| 스킬 | 버전 | 설명 | 가이드 |
+|---|---|---|---|
+| `craft-landing` | 0.1.0 | 랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase 프로세스로 빚는 의사결정·톤앤매너 스킬 | [README](./plugins/craft-landing/README.md) |
+
+## 업데이트 / 제거
+
+```
+/plugin update <skill-name>@heidi-skills
+/plugin uninstall <skill-name>@heidi-skills
+/plugin marketplace remove heidi-skills
 ```
 
 ## 구조
@@ -17,35 +33,22 @@ Heidi의 개인 Claude Code 스킬 모음. Claude Code marketplace로 publish됨
 ```
 heidi-skills/
 ├── .claude-plugin/
-│   └── marketplace.json                 ← marketplace 메타데이터
-├── plugins/                             ← marketplace install 영역
-│   └── craft-landing/
-│       ├── .claude-plugin/
-│       │   └── plugin.json              ← plugin 메타데이터
-│       └── skills/
-│           └── craft-landing/
-│               ├── SKILL.md
-│               ├── phases.md
-│               ├── references-matrix.md
-│               ├── tokens-schema.md
-│               └── anti-patterns.md
-└── notes/                               ← 레포에만 보존, install 제외
-    └── craft-landing/
-        ├── discussion-log.md
-        └── cases/
-            ├── ai-study-manager-student.md
-            └── edu-ai-os-student.md
+│   └── marketplace.json         ← marketplace 메타데이터
+└── plugins/
+    └── {skill-name}/
+        ├── .claude-plugin/
+        │   └── plugin.json      ← plugin 메타데이터
+        ├── README.md            ← 스킬 사용 가이드
+        └── skills/
+            └── {skill-name}/    ← 스킬 본체 (SKILL.md + 보조 파일)
 ```
 
-## 스킬
+## 새 스킬 추가
 
-### craft-landing (`v0.1.0`)
+1. `plugins/{name}/` 디렉토리 + `.claude-plugin/plugin.json` + `README.md` + `skills/{name}/SKILL.md` 생성
+2. `.claude-plugin/marketplace.json`의 `plugins` 배열에 항목 추가
+3. branch + PR
 
-제품/마케팅 랜딩 페이지를 input(define.md, prd.md, 또는 대화)에서 출발해 4-phase로 빚는 프로세스 스킬. 시각 originality는 별개의 `wizard-design:landing-design-create`가 담당하고, 이 스킬은 의사결정 흐름·카피·구조·톤앤매너 도출을 다룬다.
+## 피드백
 
-**Phase 1**: 시작 prompt + 첫 draft (originality starting point)
-**Phase 2**: 톤앤매너 교정 (외부 리서치 → 4-D 매트릭스 → 후보 → 토큰화)
-**Phase 3**: hero + 내러티브 (타겟 일상 언어로 번역)
-**Phase 4**: 에셋 (placeholder → 실제 자산)
-
-작업 회고는 `notes/craft-landing/discussion-log.md` + `notes/craft-landing/cases/`.
+이슈 / PR / 메시지 환영.
