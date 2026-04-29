@@ -6,6 +6,99 @@
 - `define.md` 또는 `prd.md` 또는 즉석 대화 — 제품 value, wow point, 가설, 타겟이 공유된 상태
 - 최소 input. 디자인 가이드 X, 컬러 X, 톤 X.
 
+### Input gathering 흐름 (AskUserQuestion 사용)
+
+순서: **맥락 source → (분기 후속) → 문서 읽기 → 이해 정리 컨펌 → 전환목표+작업위치 묶음 → (작업 위치 분기 후속)**.
+
+맥락 먼저 받는 이유: input 문서를 *먼저 읽어야* 이후 질문에 추측 default를 제시할 수 있고, 이상한 조합도 미리 잡힘.
+
+#### Round 1 — 맥락 input source
+
+```
+question: "랜딩의 맥락 — 무슨 제품인지, 누구한테 보여줄지, 어떤 wow point가 있는지 — 을 어디서 가져올까?"
+header: "맥락"
+options:
+  - label: "wizard 산출물"
+    description: "이미 cast/spell로 정리된 .wizard/output/{slug}/ 의 define.md, product-overview 등"
+  - label: "노션 문서"
+    description: "노션 페이지 링크"
+  - label: "현재 대화"
+    description: "현재 세션에서 나눈 대화 기반으로"
+multiSelect: false
+```
+
+(Other 옵션 자동 추가됨 — 별도 추가 X.)
+
+#### Round 1.5 — 맥락 source 분기 후속
+
+답에 따라 *조건부* 호출. 단일 자유 입력이라 **AskUserQuestion 안 쓰고 평문**으로 받기.
+
+- **wizard 산출물 선택 시**: "wizard slug 또는 `.wizard/output/{slug}/` 경로 알려줘 (예: `edu-ai-os`)"
+- **노션 문서 선택 시**: "노션 페이지 링크 줘"
+- **현재 대화 선택 시**: 이 round skip — 다음 단계(이해 정리)에서 바로 컨펌
+- **Other**: 자유 입력 받은 대로 처리
+
+#### 문서 읽기 단계 (질문 X, Claude 작업)
+
+- wizard 산출물: `.wizard/output/{slug}/define.md`, `product-overview.md`, README 등 자동 읽기
+- 노션: `notion-fetch`로 페이지 읽기
+- 현재 대화: 이전 대화 맥락 그대로 활용
+
+#### 이해 정리 컨펌 (통합 룰 — wizard/노션/현재 대화 모두 동일)
+
+문서/대화 기반으로 Claude가 다음을 *먼저 정리해서* 보여주고 컨펌 받기. 즉석 알려달라 X.
+
+정리 항목:
+- 제품 한 줄 요약
+- 타겟 (이상하면 명시 확인 — 예: "산출물에 학생용/학부모용 둘 다 있는데 어느 쪽?")
+- 핵심 wow point 1~2개
+- 전환 목표 후보 (Round 2의 default 추측)
+
+컨펌 형식: "내가 이렇게 이해했어. **빠진 내용이나 특히 강조하고 싶은 게 있어?**"
+
+이 단계는 항상 컨펌 받음 — 문서 잘못 읽거나 빠뜨릴 수 있고, 유저가 강조하고 싶은 게 문서엔 없을 수 있음.
+
+#### Round 2 — 전환목표 + 작업 위치 묶음
+
+AskUserQuestion 1회 호출에 **두 질문 묶어서**:
+
+```
+questions[0]:
+  question: "이 랜딩 페이지에서 사용자가 어떤 행동을 하면 전환으로 측정할까?"
+  header: "전환 목표"
+  options:
+    - label: "Waitlist"
+      description: "이메일·연락처 수집 (사전등록·상담신청·출시 알림 등)"
+    - label: "다운로드"
+      description: "앱 스토어 / Play 스토어 이동 버튼 클릭"
+    - label: "회원가입"
+      description: "소셜 로그인 버튼 클릭 — 사용 시작 의도 측정"
+  multiSelect: false
+
+questions[1]:
+  question: "코드는 어디에 작성할까? 새로 만들지, 이미 배포된 페이지를 정정할지, 별도 위치에 작업할지?"
+  header: "작업 위치"
+  options:
+    - label: "vibe-monorepo 신규"
+      description: "vibe-monorepo에 새 폴더 만듦"
+    - label: "기존 페이지 갱신"
+      description: "이미 배포된 라이브 랜딩 정정 — URL 그대로"
+    - label: "다른 레포지토리"
+      description: "별도 위치에 신규 작업"
+  multiSelect: false
+```
+
+> 참고: "기존 페이지를 *바탕으로* 새 페이지를 만드는" 케이스는 *vibe-monorepo 신규* (또는 다른 레포)에 해당. 별도 폴더 + 기존 카피해 시작하는 sub-pattern일 뿐, "기존 페이지 갱신" X. (case 1/2가 그랬음.)
+
+#### Round 2.5 — 작업 위치 분기 후속
+
+- **vibe-monorepo 신규**: AskUserQuestion 안 쓰고 **Claude가 폴더명 제안 + 평문 컨펌**.
+  - 명명 컨벤션: `vibe-faketest-{프로젝트-slug}-{타겟}` (예: `vibe-faketest-edu-ai-os-student`)
+  - 폴더 충돌 체크: 이미 존재하면 다른 이름 제안 (memory `feedback_never_overwrite_existing_output` 적용)
+  - 컨펌 형식: "폴더명 `vibe-faketest-{X}-{Y}` — 사용해도 돼?"
+- **기존 페이지 갱신**: 평문으로 "갱신할 페이지 경로 또는 URL 줘"
+- **다른 레포**: 평문으로 "레포 위치 + 작업 디렉토리 줘"
+
 ### 시작 prompt (원본 그대로)
 
 ```
