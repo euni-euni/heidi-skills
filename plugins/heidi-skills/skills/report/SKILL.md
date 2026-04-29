@@ -1,15 +1,15 @@
 ---
-name: report-issue
+name: report
 description: heidi-skills 플러그인 사용 중 발견한 이슈·버그·개선 제안을 정리해서 https://github.com/euni-euni/heidi-skills/issues 로 등록. 명시적 호출로만 실행.
 ---
 
-# Report Issue
+# Report
 
 heidi-skills 스킬을 쓰다가 이슈/개선 발견 시 *현재 대화 맥락*에서 자동 추출해 GitHub issue로 빠르게 등록.
 
 ## 핵심 원칙
 
-**추론 → 미리보기 컨펌**. AskUserQuestion 반사적 사용 X. 대화 맥락에서 추론 가능한 건 다시 묻지 말 것 — 추론값으로 issue 초안 *전부 채운 뒤* 미리보기로 user 컨펌.
+**추론 → 미리보기 → AskUserQuestion 컨펌**. 추론 가능한 건 다시 묻지 말 것. 미리보기로 보여주고 Enter 한 번에 등록되게.
 
 ## 흐름
 
@@ -57,19 +57,31 @@ Body markdown:
 - OS: {os if mentioned}
 ```
 
-### 3. 미리보기 + 컨펌
+### 3. 미리보기 + AskUserQuestion 컨펌
 
-*완성된* issue 전체를 보여주고:
+*완성된* issue 전체를 user에게 보여준 다음 AskUserQuestion으로 컨펌:
 
-> 이렇게 등록할게.
-> [title + body 마크다운]
-> 수정할 거 있어? (카테고리/대상 스킬/제목/본문 어디든)
+```
+question: "이대로 등록할까?"
+header: "확인"
+options:
+  - label: "등록 (Recommended)"
+    description: "위 내용 그대로 GitHub Issues에 등록"
+  - label: "취소"
+    description: "등록 안 함, 종료"
+multiSelect: false
+```
 
-**user는 자유롭게 어디든 정정** — 카테고리·대상 스킬·title·body 항목별로 고침. 정정되면 다시 미리보기 → 컨펌 반복.
+(Other 자동 추가됨 — 수정할 내용을 자유 텍스트로 입력. 예: "title 짧게", "재현 단계 추가", "환경에 OS 추가" 등.)
+
+응답에 따라:
+- **등록** (또는 Enter) → 4단계로
+- **취소** → 종료, 이슈 생성 X
+- **Other** (자유 텍스트) → 정정 반영해서 issue 다시 작성 → 다시 3단계 (loop)
 
 ### 4. Issue 생성
 
-user 컨펌 후 `gh` CLI:
+`gh` CLI로:
 
 ```bash
 gh issue create \
@@ -86,10 +98,10 @@ label은 repo에 정의된 게 있으면 추가, 없으면 생략.
 
 ## 의무 가드레일
 
-- **user 컨펌 없이 issue 생성 X** — 3번 단계 미리보기 + 컨펌 의무.
+- **user 컨펌 없이 issue 생성 X** — 3단계 AskUserQuestion 컨펌 의무.
 - **추측·과장 X** — 대화에 없는 내용을 "아마 ~일 것" 식으로 채우지 말 것. 모르면 placeholder (`{TODO}`) 또는 미리보기에서 명시.
 - **민감 정보 점검** — title/body에 회사 내부 정보(콴다 PRD 슬러그·메트릭 등)가 들어가는지 확인. heidi-skills는 public repo. 들어가면 user에게 명시 경고 후 결정.
-- **AskUserQuestion 반사적 사용 X** — 추론 가능한 건 추론, 미리보기로 컨펌.
+- **AskUserQuestion 반사적 사용 X** — 1·2단계는 추론, 3단계 컨펌만 AskUserQuestion.
 
 ## Scope-out
 

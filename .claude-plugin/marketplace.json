@@ -12,9 +12,9 @@
       "description": "랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase로 빚는 의사결정·톤앤매너 프로세스 스킬"
     },
     {
-      "name": "report-issue",
-      "source": "./plugins/report-issue",
-      "description": "heidi-skills 플러그인 사용 중 발견한 이슈·버그·개선 제안을 GitHub Issues로 등록하는 스킬"
+      "name": "heidi-skills",
+      "source": "./plugins/heidi-skills",
+      "description": "heidi-skills marketplace 자체에 대한 메타 도구 모음. 현재 report 스킬 1개 (이슈 등록). 향후 marketplace 운영·관리 스킬 이 plugin에"
     }
   ]
 }
