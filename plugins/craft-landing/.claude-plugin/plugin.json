@@ -1,0 +1,12 @@
+{
+  "name": "craft-landing",
+  "description": "랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase 프로세스로 빚는 스킬. 시각 originality는 wizard-design:landing-design-create가 담당하고, 이 스킬은 의사결정 흐름·카피·구조·톤앤매너 도출을 다룬다.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Heidi Park",
+    "email": "eunieuni.corn@gmail.com"
+  },
+  "homepage": "https://github.com/euni-euni/heidi-skills",
+  "repository": "https://github.com/euni-euni/heidi-skills",
+  "keywords": ["landing-page", "design-process", "copywriting", "marketing"]
+}
