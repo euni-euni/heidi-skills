@@ -1,6 +1,6 @@
 ---
 name: craft-landing
-description: 제품/마케팅 랜딩 페이지를 input(define.md, prd.md, 또는 대화)에서 출발해 단계별로 만들어가는 프로세스 스킬. 시각 originality는 별개의 wizard-design:landing-design-create가 담당하고, 이 스킬은 의사결정 흐름·카피·구조·톤앤매너 도출을 다룬다. 명시적 호출로만 실행.
+description: 제품/마케팅 랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase 프로세스로 만드는 스킬. 시각 originality·톤·카피·구조 결정을 외부 리서치·4-D 레퍼런스 매트릭스·anti-pattern 가드레일 기반으로 균형잡아 진행. 가드레일 없는 극단 시각 originality는 별개 스킬 wizard-design:landing-design-create. 명시적 호출로만 실행.
 ---
 
 # Craft Landing
@@ -54,7 +54,7 @@ Hero에서 가장 전달할 한 가지 + 랜딩 전반 내러티브 arc. prompt 
 
 - **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인 능력에 맡김 (단, 어미 *분포 모니터링*은 Phase 3 내).
 - **production화** (vibe-monorepo 이관 + Vercel 배포) — `wizard-vibecoding` 스킬 사용
-- **시각 originality 가드레일** — `wizard-design:landing-design-create` 스킬이 담당
+- **가드레일 없는 극단 시각 originality** — `wizard-design:landing-design-create` 스킬이 담당 (craft-landing은 외부 리서치·4-D 매트릭스 등 *프로세스 가드레일* 적용해 균형. 두 스킬은 *접근 다름*이라 충돌 가능 — 한 워크플로에 둘 다 쓰려면 신중히)
 - **근본 재시작** (예: ai-study-manager Day 2 v3 → v4 같은 큰 리디자인) — 예외 사건, 스킬화 X
 
 ## Reference 파일
