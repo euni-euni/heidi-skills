@@ -19,6 +19,7 @@ Claude Code 안에서 marketplace 등록 → 원하는 스킬 설치:
 | 스킬 | 버전 | 설명 | 가이드 |
 |---|---|---|---|
 | `craft-landing` | 0.1.0 | 랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase 프로세스로 빚는 의사결정·톤앤매너 스킬 | [README](./plugins/craft-landing/README.md) |
+| `report-issue` | 0.1.0 | heidi-skills 플러그인 사용 중 발견한 이슈·버그·개선 제안을 GitHub Issues로 등록하는 스킬 | [README](./plugins/report-issue/README.md) |
 
 ## 업데이트 / 제거
 
