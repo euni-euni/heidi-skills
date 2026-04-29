@@ -8,11 +8,11 @@
 
 | | craft-landing | landing-design-create |
 |---|---|---|
-| 시각 originality | Phase 1 시작점에서 추구 후 Phase 2에서 교정 | 극단으로 추구 (only) |
-| 가드레일·레퍼런스 | 4-D 매트릭스, 외부 리서치, anti-pattern 13종 | 일절 거부 (트렌드·시스템·CLAUDE.md follow X) |
-| 결과 | 균형 (originality + 근거) | raw 극단 originality |
+| 시각 originality | Phase 1 시작점에서 추구 후 Phase 2에서 교정 | 극대화에 집중 |
+| 레퍼런스·가드레일 | 4-D 매트릭스, 외부 리서치, anti-pattern 13종 | 의도적으로 따르지 않음 (originality 위해) |
+| 결과 | originality + 근거 균형 | 강한 originality |
 
-둘은 *접근이 다른 별개 스킬*. 한 워크플로 안에서 둘 다 쓰면 충돌 가능 (craft-landing은 레퍼런스 활용, landing-design-create는 거부) — 신중히 결합.
+둘은 *목적이 다른 별개 스킬*. 강한 originality 원하면 landing-design-create, 의사결정·톤·카피까지 통합 프로세스를 원하면 craft-landing. 둘 다 써보고 마음에 드는 산출물 선택해도 좋음.
 
 ## 전제
 
@@ -71,8 +71,8 @@ Claude Code 안에서:
 
 ### Scope-out (이 스킬에서 안 다룸)
 
-- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인 능력
-- **가드레일 없는 극단 시각 originality** — `wizard-design:landing-design-create` 별도 사용 (위 비교 참조)
+- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인이 알아서
+- **시각 originality 극대화** — `wizard-design:landing-design-create` 별도 사용 (위 비교 참조)
 - **production 배포** (vibe-monorepo + Vercel) — `wizard-vibecoding:vibe-vercel-migrate`
 - **근본 재시작** (큰 리디자인) — 예외 사건
 
