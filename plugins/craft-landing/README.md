@@ -2,7 +2,17 @@
 
 랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase 프로세스로 빚는 Claude Code 스킬.
 
-시각 originality는 별개의 `wizard-design:landing-design-create`가 담당하고, 이 스킬은 *의사결정 흐름·카피·구조·톤앤매너 도출*을 다룬다. 명시적 호출로만 실행.
+*시각 originality·톤·카피·구조 결정*을 외부 리서치·4-D 레퍼런스 매트릭스·anti-pattern 가드레일 기반으로 균형잡아 진행. 명시적 호출로만 실행.
+
+### `wizard-design:landing-design-create`와의 차이
+
+| | craft-landing | landing-design-create |
+|---|---|---|
+| 시각 originality | Phase 1 시작점에서 추구 후 Phase 2에서 교정 | 극대화에 집중 |
+| 레퍼런스·가드레일 | 4-D 매트릭스, 외부 리서치, anti-pattern 13종 | 의도적으로 따르지 않음 (originality 위해) |
+| 결과 | originality + 근거 균형 | 강한 originality |
+
+둘은 *목적이 다른 별개 스킬*. 강한 originality 원하면 landing-design-create, 의사결정·톤·카피까지 통합 프로세스를 원하면 craft-landing. 둘 다 써보고 마음에 드는 산출물 선택해도 좋음.
 
 ## 전제
 
@@ -61,8 +71,8 @@ Claude Code 안에서:
 
 ### Scope-out (이 스킬에서 안 다룸)
 
-- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인 능력
-- **시각 originality 가드레일** — `wizard-design:landing-design-create`
+- **카피 fine-tuning** (어미·단어 단위 미세 조정) — 개인이 알아서
+- **시각 originality 극대화** — `wizard-design:landing-design-create` 별도 사용 (위 비교 참조)
 - **production 배포** (vibe-monorepo + Vercel) — `wizard-vibecoding:vibe-vercel-migrate`
 - **근본 재시작** (큰 리디자인) — 예외 사건
 
