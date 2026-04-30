@@ -1,12 +1,12 @@
 {
   "name": "heidi-skills",
-  "description": "heidi-skills marketplace 자체에 대한 메타 도구 모음. 현재는 issue report 1개. 향후 marketplace 운영·관리 관련 스킬 추가 시 이 plugin에.",
-  "version": "0.1.0",
+  "description": "heidi-skills marketplace의 기본 도구 모음. 별도 plugin으로 분리할 정도는 아니지만 자주 쓰는 가벼운 단일 스킬들 (이슈 리포트, 디스커션 로그 등)을 한 plugin으로 묶음.",
+  "version": "0.2.0",
   "author": {
     "name": "Heidi Park",
     "email": "eunieuni.corn@gmail.com"
   },
   "homepage": "https://github.com/euni-euni/heidi-skills",
   "repository": "https://github.com/euni-euni/heidi-skills",
-  "keywords": ["meta-tools", "github-issues", "feedback"]
+  "keywords": ["lightweight-tools", "github-issues", "discussion-log", "retrospective"]
 }
