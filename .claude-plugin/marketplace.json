@@ -12,14 +12,9 @@
       "description": "랜딩 페이지를 input(define.md/prd.md/대화)에서 출발해 4-phase로 빚는 의사결정·톤앤매너 프로세스 스킬"
     },
     {
-      "name": "discussion-log",
-      "source": "./plugins/discussion-log",
-      "description": "현재 대화의 주요 논의·의사결정·유저 피드백·Claude 반성을 raw 인용 보존하며 discussion-log.md로 정리"
-    },
-    {
       "name": "heidi-skills",
       "source": "./plugins/heidi-skills",
-      "description": "heidi-skills marketplace 자체에 대한 메타 도구 모음. 현재 report 스킬 1개 (이슈 등록). 향후 marketplace 운영·관리 스킬 이 plugin에"
+      "description": "heidi-skills marketplace의 기본 도구 모음. 가벼운 단일 스킬들(report, discussion-log)을 한 plugin으로 묶음."
     }
   ]
 }
